@@ -8,13 +8,21 @@
     {
       "name": "Armor Sandbox",
       "bundleIdentifier": "com.armorsimulation.app",
-      "developerName": "TTVNerdWord",
-      "version": "2.0.0",
-      "versionDate": "2026-11-10",
-      "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/ArmorSandbox-2.0.0.ipa",
-      "localizedDescription": "Sideloaded build for Armor Sandbox.",
+      "developerName": "Self-Published",
+      "subtitle": "Sideloaded Build",
+      "localizedDescription": "Sideloaded build for Armor Sandbox compiled dynamically.",
       "iconURL": "https://githubusercontent.com",
-      "size": 6332016
+      "tintColor": "#007AFF",
+      "versions": [
+        {
+          "version": "2.0.0",
+          "date": "2026-11-10",
+          "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/ArmorSandbox-2.0.0.ipa",
+          "size": 6332016,
+          "localizedDescription": "Version 2.0.0 release update update."
+        }
+      ]
     }
-  ]
+  ],
+  "news": []
 }
