@@ -2,52 +2,74 @@ import os
 import json
 import zipfile
 import re
+import shutil
 from datetime import datetime
 
 def extract_metadata(ipa_path):
-    bundle_id = "com.johncoates.ArmorSandbox"
-    version = "2.0.0"
-    display_name = "ArmorSandbox"
+    # Standard clean fallbacks if an entry is completely missing inside the plist
+    filename = os.path.splitext(os.path.basename(ipa_path))[0]
+    bundle_id = f"com.custom.{filename.lower().replace(' ', '')}"
+    version = "1.0.0"
+    display_name = filename
+    
+    temp_dir = f"extracted_{filename}"
     
     try:
+        # Extract the entire archive to a temporary directory to prevent path matching locks
         with zipfile.ZipFile(ipa_path, 'r') as ipa:
-            plist_path = None
-            for file in ipa.namelist():
-                if re.match(r'Payload/[^/]+\.app/Info.plist$', file):
-                    plist_path = file
-                    break
+            ipa.extractall(temp_dir)
             
+        # Search deeply within the extracted payload for the authentic Info.plist file
+        plist_path = None
+        for root, dirs, files in os.walk(temp_dir):
+            for file in files:
+                if file == "Info.plist" and "Payload" in root:
+                    plist_path = os.path.join(root, file)
+                    break
             if plist_path:
-                plist_data = ipa.read(plist_path)
-                plist_str = plist_data.decode('utf-8', errors='ignore')
+                break
                 
-                bid_match = re.search(r'<key>CFBundleIdentifier</key>\s*<string>([^<]+)</string>', plist_str)
-                ver_match = re.search(r'<key>CFBundleShortVersionString</key>\s*<string>([^<]+)</string>', plist_str)
-                name_match = re.search(r'<key>CFBundleDisplayName</key>\s*<string>([^<]+)</string>', plist_str)
-                
-                if bid_match: bundle_id = bid_match.group(1).strip()
-                if ver_match: version = ver_match.group(1).strip()
-                if name_match: display_name = name_match.group(1).strip()
+        if plist_path:
+            with open(plist_path, 'rb') as f:
+                plist_data = f.read()
+            
+            # Decode safely ignoring complex binary symbols
+            plist_str = plist_data.decode('utf-8', errors='ignore')
+            
+            bid_match = re.search(r'<key>CFBundleIdentifier</key>\s*<string>([^<]+)</string>', plist_str)
+            ver_match = re.search(r'<key>CFBundleShortVersionString</key>\s*<string>([^<]+)</string>', plist_str)
+            name_match = re.search(r'<key>CFBundleDisplayName</key>\s*<string>([^<]+)</string>', plist_str)
+            
+            # Fallback to standard bundle name if display name tag isn't explicitly used
+            if not name_match:
+                name_match = re.search(r'<key>CFBundleName</key>\s*<string>([^<]+)</string>', plist_str)
+            
+            if bid_match: bundle_id = bid_match.group(1).strip()
+            if ver_match: version = ver_match.group(1).strip()
+            if name_match: display_name = name_match.group(1).strip()
+            
     except Exception as e:
-        print(f"Extraction note: {e}")
+        print(f"Extraction processing note for {ipa_path}: {e}")
+    finally:
+        # Ensure temporary directories are permanently removed after parsing closes
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
         
     return bundle_id, version, display_name
 
 def main():
     username = "TTVNerdWord"
     repo_name = "NW-Repo-IG"
-    
-    # Assembling chunks cleanly inside the automation script
     base_url = f"https://{username}.github.io/{repo_name}"
     
-    # SideStore explicitly demands subtitle, iconURL, and tintColor layouts
     data = {
         "name": "NW Repository",
         "identifier": "com.ttvnerdword.repo",
         "subtitle": "Custom Sideload Apps",
         "iconURL": "https://githubusercontent.com",
         "tintColor": "#007AFF",
-        "apps": []
+        "apps":,
+        "news":
     }
     
     found_ipas = False
@@ -55,30 +77,39 @@ def main():
         if file.endswith(".ipa"):
             found_ipas = True
             bundle_id, version, display_name = extract_metadata(file)
+            file_size = os.path.getsize(file)
+            current_date = datetime.utcnow().strftime("%Y-%m-%d")
             
             app_entry = {
                 "name": display_name,
                 "bundleIdentifier": bundle_id,
-                "developerName": "TTVNerdWord",
-                "version": version,
-                "versionDate": datetime.utcnow().strftime("%Y-%m-%d"),
-                "downloadURL": f"{base_url}/{file}",
-                "localizedDescription": f"Sideloaded build for {display_name}.",
+                "developerName": "Self-Published",
+                "subtitle": "Sideloaded Build",
+                "localizedDescription": f"Sideloaded build for {display_name} compiled dynamically.",
                 "iconURL": "https://githubusercontent.com",
-                "size": os.path.getsize(file)
+                "tintColor": "#007AFF",
+                "versions": [
+                    {
+                        "version": version,
+                        "date": current_date,
+                        "downloadURL": f"{base_url}/{file}",
+                        "size": file_size,
+                        "localizedDescription": f"Version {version} release update update."
+                    }
+                ]
             }
             data["apps"].append(app_entry)
-            print(f"Successfully formatted: {display_name}")
+            print(f"Successfully processed: {display_name} [{bundle_id}] v{version}")
+
+    if not found_ipas:
+        print("No .ipa files detected in the root directory directory.")
 
     with open("apps.json", "w") as f:
         json.dump(data, f, indent=2)
         
     with open("apps_esign.json", "w") as f:
         json.dump(data, f, indent=2)
-        
-    if not os.path.exists("bundleId.csv"):
-        with open("bundleId.csv", "w") as f:
-            f.write("Source,BundleId\n")
 
 if __name__ == "__main__":
     main()
+
