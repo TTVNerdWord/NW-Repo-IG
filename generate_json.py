@@ -68,9 +68,10 @@ def main():
         "subtitle": "Custom Sideload Apps",
         "iconURL": "https://githubusercontent.com",
         "tintColor": "#007AFF",
-        "apps":,
-        "news":
+        "apps": [],
+        "news": []
     }
+
     
     found_ipas = False
     for file in os.listdir("."):
