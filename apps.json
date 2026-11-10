@@ -1,0 +1,15 @@
+{
+  "name": "My Combined Repo",
+  "identifier": "com.custom.combinedrepo",
+  "apps": [
+    {
+      "name": "ArmorSandbox-2.0.0",
+      "bundleIdentifier": "com.example.ArmorSandbox-2.0.0",
+      "developerName": "Self-Published",
+      "version": "1.0.0",
+      "versionDate": "2026-11-10",
+      "downloadURL": "https://ttvnerdword.github.io/NW-Repo-IG/ArmorSandbox-2.0.0.ipa",
+      "localizedDescription": "Sideloaded via unified repository automation."
+    }
+  ]
+}

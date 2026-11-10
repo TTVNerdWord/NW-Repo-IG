@@ -1,0 +1,14 @@
+Package: com.example.ArmorSandbox-2.0.0
+Version: 1.0.0
+Architecture: iphoneos-arm
+Maintainer: Continuous Integration Bot
+Filename: debs/ArmorSandbox-2.0.0.deb
+Size: 6295230
+MD5sum: 74cc0327ef5f95cc8a554e7575007ba7
+SHA1: 265ea8802886d3b67e525ebb95ba860f009fe85f
+SHA256: 9e1382dc8ec66bd61c870d268350026b5b7fb91c5bd871bb29f65d44a8bc99b8
+Section: Applications
+Description: Dynamically compiled application package for jailbroken ecosystems.
+Author: Developer
+Name: ArmorSandbox-2.0.0
+
