@@ -1,0 +1,94 @@
+name: Generate iOS OTA Installer
+
+on:
+  push:
+    paths:
+      - '*.ipa'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages Metadata
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Process IPA Files
+        run: |
+
+          BASE_URL="${{ steps.pages.outputs.base_url }}"
+          
+
+          echo "<!DOCTYPE html><html><head><title>My iOS App Store</title>" > index.html
+          echo "<meta name='viewport' content='width=device-width, initial-scale=1'>" >> index.html
+          echo "<style>body{font-family:sans-serif; text-align:center; padding:50px;} .btn{display:inline-block; padding:15px 25px; background:#007aff; color:white; text-decoration:none; border-radius:8px; font-weight:bold; margin:10px;}</style></head><body>" >> index.html
+          echo "<h1>Available Apps</h1>" >> index.html
+
+   
+          for ipa in *.ipa; do
+            [ -e "$ipa" ] || continue
+            filename="${ipa%.*}"
+            
+            # Define file paths for the web
+            IPA_URL="$BASE_URL/$ipa"
+            PLIST_NAME="${filename}_manifest.plist"
+            
+        
+            cat <<EOF > "$PLIST_NAME"
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://apple.com">
+          <plist version="1.0">
+          <dict>
+              <key>items</key>
+              <array>
+                  <dict>
+                      <key>assets</key>
+                      <array>
+                          <dict>
+                              <key>kind</key>
+                              <string>software-package</string>
+                              <key>url</key>
+                              <string>$IPA_URL</string>
+                          </dict>
+                      </array>
+                      <key>metadata</key>
+                      <dict>
+                          <key>bundle-identifier</key>
+                          <string>com.example.$filename</string>
+                          <key>bundle-version</key>
+                          <string>1.0.0</string>
+                          <key>kind</key>
+                          <string>software</string>
+                          <key>title</key>
+                          <string>$filename</string>
+                      </dict>
+                  </dict>
+              </array>
+          </dict>
+          </plist>
+          EOF
+
+         
+            PLIST_URL="$BASE_URL/$PLIST_NAME"
+            echo "<p><strong>$filename</strong></p>" >> index.html
+            echo "<a class='btn' href='itms-services://?action=download-manifest&url=$PLIST_URL'>Install App</a><br><br>" >> index.html
+          done
+
+          echo "</body></html>" >> index.html
+
+      - name: Commit and Push Generated Files
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@://github.com"
+          git add *.plist index.html
+          git commit -m "Automated update of OTA installation page" || echo "No changes to commit"
+          git push origin main
