@@ -1,6 +1,9 @@
 {
-  "name": "NW-Repo-IG",
+  "name": "NW Repository",
   "identifier": "com.ttvnerdword.repo",
+  "subtitle": "Custom Sideload Apps",
+  "iconURL": "https://githubusercontent.com",
+  "tintColor": "#007AFF",
   "apps": [
     {
       "name": "Armor Sandbox",
@@ -9,7 +12,9 @@
       "version": "2.0.0",
       "versionDate": "2026-11-10",
       "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/ArmorSandbox-2.0.0.ipa",
-      "localizedDescription": "Sideloaded build for Armor Sandbox."
+      "localizedDescription": "Sideloaded build for Armor Sandbox.",
+      "iconURL": "https://githubusercontent.com",
+      "size": 6332016
     }
   ]
 }
