@@ -63,10 +63,10 @@ def main():
     base_url = f"https://{username}.github.io/{repo_name}"
     
     data = {
-        "name": "NW Repository",
+        "name": "NerdWorld",
         "identifier": "com.ttvnerdword.repo",
-        "subtitle": "Custom Sideload Apps",
-        "iconURL": "https://githubusercontent.com",
+        "subtitle": "I do what I want. I do what I please",
+        "iconURL": "https://githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.webp",
         "tintColor": "#007AFF",
         "apps": [],
         "news": []
