@@ -5,7 +5,6 @@ import re
 from datetime import datetime
 
 def extract_metadata(ipa_path):
-    # Set proper defaults for your specific app
     bundle_id = "com.johncoates.ArmorSandbox"
     version = "2.0.0"
     display_name = "ArmorSandbox"
@@ -30,23 +29,27 @@ def extract_metadata(ipa_path):
                 if ver_match: version = ver_match.group(1).strip()
                 if name_match: display_name = name_match.group(1).strip()
     except Exception as e:
-        print(f"Extraction note for {ipa_path}: {e}")
+        print(f"Extraction note: {e}")
         
     return bundle_id, version, display_name
 
 def main():
     username = "TTVNerdWord"
     repo_name = "NW-Repo-IG"
+    
+    # Assembling chunks cleanly inside the automation script
     base_url = f"https://{username}.github.io/{repo_name}"
     
-    # Force initialize clean structure to eliminate previous 404/corruption states
+    # SideStore explicitly demands subtitle, iconURL, and tintColor layouts
     data = {
-        "name": "NW-Repo-IG",
+        "name": "NW Repository",
         "identifier": "com.ttvnerdword.repo",
+        "subtitle": "Custom Sideload Apps",
+        "iconURL": "https://githubusercontent.com",
+        "tintColor": "#007AFF",
         "apps": []
     }
     
-    # Process local IPA files sitting right in your repo
     found_ipas = False
     for file in os.listdir("."):
         if file.endswith(".ipa"):
@@ -60,19 +63,16 @@ def main():
                 "version": version,
                 "versionDate": datetime.utcnow().strftime("%Y-%m-%d"),
                 "downloadURL": f"{base_url}/{file}",
-                "localizedDescription": f"Sideloaded build for {display_name}."
+                "localizedDescription": f"Sideloaded build for {display_name}.",
+                "iconURL": "https://githubusercontent.com",
+                "size": os.path.getsize(file)
             }
             data["apps"].append(app_entry)
-            print(f"Successfully processed: {display_name}")
+            print(f"Successfully formatted: {display_name}")
 
-    if not found_ipas:
-        print("Note: No .ipa files found in root directory to process.")
-
-    # Write out the clean JSON file cleanly
     with open("apps.json", "w") as f:
         json.dump(data, f, indent=2)
         
-    # Create empty fallbacks for other files the .yml tracking pattern expects
     with open("apps_esign.json", "w") as f:
         json.dump(data, f, indent=2)
         
