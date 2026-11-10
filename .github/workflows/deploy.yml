@@ -22,27 +22,42 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
+      - name: Install Plist Tools
+        run: sudo apt-get update && sudo apt-get install -y libplist-utils
+
       - name: Process IPA Files
         run: |
-
           BASE_URL="${{ steps.pages.outputs.base_url }}"
           
-
           echo "<!DOCTYPE html><html><head><title>My iOS App Store</title>" > index.html
           echo "<meta name='viewport' content='width=device-width, initial-scale=1'>" >> index.html
           echo "<style>body{font-family:sans-serif; text-align:center; padding:50px;} .btn{display:inline-block; padding:15px 25px; background:#007aff; color:white; text-decoration:none; border-radius:8px; font-weight:bold; margin:10px;}</style></head><body>" >> index.html
           echo "<h1>Available Apps</h1>" >> index.html
 
-   
           for ipa in *.ipa; do
             [ -e "$ipa" ] || continue
             filename="${ipa%.*}"
             
-            # Define file paths for the web
+            # 1. Unzip the Info.plist from the IPA
+            unzip -p "$ipa" "Payload/*.app/Info.plist" > extracted_info.plist || true
+            
+            # 2. Convert binary plist to readable XML and extract the real Bundle ID
+            if [ -f extracted_info.plist ]; then
+              plistutil -i extracted_info.plist -o readable_info.plist || true
+              BUNDLE_ID=$(grep -A 1 "CFBundleIdentifier" readable_info.plist | grep "<string>" | sed 's/.*<string>\(.*\)<\/string>.*/\1/')
+              VERSION=$(grep -A 1 "CFBundleShortVersionString" readable_info.plist | grep "<string>" | sed 's/.*<string>\(.*\)<\/string>.*/\1/')
+            fi
+
+            # Fallbacks if extraction fails
+            BUNDLE_ID="${BUNDLE_ID:-com.example.$filename}"
+            VERSION="${VERSION:-1.0.0}"
+            
+            # Clean up temporary files
+            rm -f extracted_info.plist readable_info.plist
+
             IPA_URL="$BASE_URL/$ipa"
             PLIST_NAME="${filename}_manifest.plist"
             
-        
             cat <<EOF > "$PLIST_NAME"
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://apple.com">
@@ -63,9 +78,9 @@ jobs:
                       <key>metadata</key>
                       <dict>
                           <key>bundle-identifier</key>
-                          <string>com.example.$filename</string>
+                          <string>$BUNDLE_ID</string>
                           <key>bundle-version</key>
-                          <string>1.0.0</string>
+                          <string>$VERSION</string>
                           <key>kind</key>
                           <string>software</string>
                           <key>title</key>
@@ -77,9 +92,8 @@ jobs:
           </plist>
           EOF
 
-         
             PLIST_URL="$BASE_URL/$PLIST_NAME"
-            echo "<p><strong>$filename</strong></p>" >> index.html
+            echo "<p><strong>$filename</strong> (v$VERSION)</p>" >> index.html
             echo "<a class='btn' href='itms-services://?action=download-manifest&url=$PLIST_URL'>Install App</a><br><br>" >> index.html
           done
 
@@ -90,5 +104,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@://github.com"
           git add *.plist index.html
-          git commit -m "Automated update of OTA installation page" || echo "No changes to commit"
+          git commit -m "Automated update with real bundle IDs" || echo "No changes to commit"
           git push origin main
