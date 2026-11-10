@@ -36,7 +36,8 @@ jobs:
         with:
           commit_message: "Automated Change"
           commit_options: '--no-verify --signoff'
-          file_pattern: 'apps.json apps_esign.json bundleId.csv icons/*'
+          file_pattern: 'apps.json apps_esign.json bundleId.csv'
           commit_user_name: "github-actions[bot]"
           commit_user_email: "41898282+github-actions[bot]@://github.com"
           push_options: '--force'
+
