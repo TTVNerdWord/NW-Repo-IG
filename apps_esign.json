@@ -1,0 +1,15 @@
+{
+  "name": "NW-Repo-IG",
+  "identifier": "com.ttvnerdword.repo",
+  "apps": [
+    {
+      "name": "Armor Sandbox",
+      "bundleIdentifier": "com.armorsimulation.app",
+      "developerName": "TTVNerdWord",
+      "version": "2.0.0",
+      "versionDate": "2026-11-10",
+      "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/ArmorSandbox-2.0.0.ipa",
+      "localizedDescription": "Sideloaded build for Armor Sandbox."
+    }
+  ]
+}
