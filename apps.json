@@ -6,7 +6,7 @@
   "tintColor": "#007AFF",
   "apps": [
     {
-      "name": "Armor Sandbox 2.5.0",
+      "name": "Armor Sandbox",
       "bundleIdentifier": "com.armorsimulation.app",
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "name": "Armor Sandbox 1.9.2+",
+      "name": "Armor Sandbox",
       "bundleIdentifier": "com.armorsimulation.app",
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
