@@ -56,8 +56,8 @@ def main():
     repo_name = "Armor-Sandbox-Tweaks"
     base_url = f"https://{username}.github.io/{repo_name}"
     
-    # Updated icon URL pointing to the Images folder
-    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/AS.png"
+ 
+    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/Hi.png"
     
     data = {
         "name": "Armor Sandbox Tweaks",
