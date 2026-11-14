@@ -2,7 +2,7 @@
   "name": "Armor Sandbox Tweaks",
   "identifier": "com.ArmorSandbox.repo",
   "subtitle": "I do what I want. I do what I please",
-  "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/AS.png",
+  "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/Hi.png",
   "tintColor": "#007AFF",
   "apps": [
     {
@@ -11,13 +11,13 @@
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
       "localizedDescription": "Sideloaded build for Armor Sandbox (2.5.0) compiled dynamically.",
-      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/AS.png",
+      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/AS.png",
       "tintColor": "#007AFF",
       "versions": [
         {
           "version": "2.5.0",
           "date": "2026-11-14",
-          "downloadURL": "https://TTVNerdWord.github.io/Armor-Sandbox-Tweaks/2.5.0-PremiumActive.ipa",
+          "downloadURL": "https://TTVNerdWord.github.io/Armor-Sandbox-Tweaks/IPAs/2.5.0-PremiumActive.ipa",
           "size": 5069471,
           "localizedDescription": "Version 2.5.0 release update."
         }
@@ -29,13 +29,13 @@
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
       "localizedDescription": "Sideloaded build for Armor Sandbox (1.9.2) compiled dynamically.",
-      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/AS.png",
+      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/AS.png",
       "tintColor": "#007AFF",
       "versions": [
         {
           "version": "1.9.2",
           "date": "2026-11-14",
-          "downloadURL": "https://TTVNerdWord.github.io/Armor-Sandbox-Tweaks/AS-1.9.2-FullTweak.ipa",
+          "downloadURL": "https://TTVNerdWord.github.io/Armor-Sandbox-Tweaks/IPAs/AS-1.9.2-FullTweak.ipa",
           "size": 5288343,
           "localizedDescription": "Version 1.9.2 release update."
         }
