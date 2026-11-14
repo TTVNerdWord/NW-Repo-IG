@@ -2,16 +2,16 @@
   "name": "Armor Sandbox Tweaks",
   "identifier": "com.ArmorSandbox.repo",
   "subtitle": "I do what I want. I do what I please",
-  "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.png",
+  "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/AS.png",
   "tintColor": "#007AFF",
   "apps": [
     {
-      "name": "Armor Sandbox",
-      "bundleIdentifier": "com.armorsimulation.app",
+      "name": "Armor Sandbox (2.5.0NoIntegrity)",
+      "bundleIdentifier": "com.armorsimulation.app.250nointegrity",
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
-      "localizedDescription": "Sideloaded build for Armor Sandbox compiled dynamically.",
-      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.png",
+      "localizedDescription": "Sideloaded build for Armor Sandbox (2.5.0NoIntegrity) compiled dynamically.",
+      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/AS.png",
       "tintColor": "#007AFF",
       "versions": [
         {
