@@ -56,7 +56,6 @@ def main():
     repo_name = "Armor-Sandbox-Tweaks"
     base_url = f"https://{username}.github.io/{repo_name}"
     
-    # Dynamic raw link for AS.png in your repository
     icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/AS.png"
     
     data = {
@@ -83,7 +82,9 @@ def main():
             file_slug = re.sub(r'[^a-z0-9]', '', file_slug)
             
             unique_bundle_id = f"{plist_bundle_id}.{file_slug}"
-            unique_app_name = f"{display_name} ({os.path.splitext(file)[0]})"
+            
+            # Include version number in the app name
+            unique_app_name = f"{display_name} ({version})"
             
             app_entry = {
                 "name": unique_app_name,
@@ -104,7 +105,7 @@ def main():
                 ]
             }
             data["apps"].append(app_entry)
-            print(f"Successfully processed: {unique_app_name} [{unique_bundle_id}] v{version}")
+            print(f"Successfully processed: {unique_app_name} [{unique_bundle_id}]")
 
     if not found_ipas:
         print("No .ipa files detected in the root directory.")
