@@ -56,7 +56,8 @@ def main():
     repo_name = "Armor-Sandbox-Tweaks"
     base_url = f"https://{username}.github.io/{repo_name}"
     
-    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/AS.png"
+    # Updated icon URL pointing to the Images folder
+    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/AS.png"
     
     data = {
         "name": "Armor Sandbox Tweaks",
@@ -69,46 +70,47 @@ def main():
     }
 
     found_ipas = False
+    ipa_dir = "IPAs"
 
-    for file in os.listdir("."):
-        if file.endswith(".ipa"):
-            found_ipas = True
-            plist_bundle_id, version, display_name = extract_metadata(file)
-            file_size = os.path.getsize(file)
-            current_date = datetime.utcnow().strftime("%Y-%m-%d")
-            
-            # Create a unique bundle ID suffix so multiple uploads don't conflict
-            file_slug = os.path.splitext(file)[0].lower()
-            file_slug = re.sub(r'[^a-z0-9]', '', file_slug)
-            
-            unique_bundle_id = f"{plist_bundle_id}.{file_slug}"
-            
-            # Include version number in the app name
-            unique_app_name = f"{display_name} ({version})"
-            
-            app_entry = {
-                "name": unique_app_name,
-                "bundleIdentifier": unique_bundle_id,
-                "developerName": "Self-Published",
-                "subtitle": "Sideloaded Build",
-                "localizedDescription": f"Sideloaded build for {unique_app_name} compiled dynamically.",
-                "iconURL": icon_url,
-                "tintColor": "#007AFF",
-                "versions": [
-                    {
-                        "version": version,
-                        "date": current_date,
-                        "downloadURL": f"{base_url}/{file}",
-                        "size": file_size,
-                        "localizedDescription": f"Version {version} release update."
-                    }
-                ]
-            }
-            data["apps"].append(app_entry)
-            print(f"Successfully processed: {unique_app_name} [{unique_bundle_id}]")
+    if os.path.exists(ipa_dir) and os.path.isdir(ipa_dir):
+        for file in os.listdir(ipa_dir):
+            if file.endswith(".ipa"):
+                found_ipas = True
+                ipa_path = os.path.join(ipa_dir, file)
+                plist_bundle_id, version, display_name = extract_metadata(ipa_path)
+                file_size = os.path.getsize(ipa_path)
+                current_date = datetime.utcnow().strftime("%Y-%m-%d")
+                
+                # Create a unique bundle ID suffix so multiple uploads don't conflict
+                file_slug = os.path.splitext(file)[0].lower()
+                file_slug = re.sub(r'[^a-z0-9]', '', file_slug)
+                
+                unique_bundle_id = f"{plist_bundle_id}.{file_slug}"
+                unique_app_name = f"{display_name} ({version})"
+                
+                app_entry = {
+                    "name": unique_app_name,
+                    "bundleIdentifier": unique_bundle_id,
+                    "developerName": "Self-Published",
+                    "subtitle": "Sideloaded Build",
+                    "localizedDescription": f"Sideloaded build for {unique_app_name} compiled dynamically.",
+                    "iconURL": icon_url,
+                    "tintColor": "#007AFF",
+                    "versions": [
+                        {
+                            "version": version,
+                            "date": current_date,
+                            "downloadURL": f"{base_url}/IPAs/{file}",
+                            "size": file_size,
+                            "localizedDescription": f"Version {version} release update."
+                        }
+                    ]
+                }
+                data["apps"].append(app_entry)
+                print(f"Successfully processed: {unique_app_name} [{unique_bundle_id}]")
 
     if not found_ipas:
-        print("No .ipa files detected in the root directory.")
+        print("No .ipa files detected in the 'IPAs' directory.")
 
     with open("apps.json", "w") as f:
         json.dump(data, f, indent=2)
