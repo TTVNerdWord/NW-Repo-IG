@@ -59,12 +59,12 @@ def extract_metadata(ipa_path):
 
 def main():
     username = "TTVNerdWord"
-    repo_name = "NW-Repo-IG"
+    repo_name = "Armor-Sandbox-Tweaks"
     base_url = f"https://{username}.github.io/{repo_name}"
     
     data = {
         "name": "Armor Sandbox Tweaks",
-        "identifier": "com.AS.repo",
+        "identifier": "com.ArmorSandbox.repo",
         "subtitle": "I do what I want. I do what I please",
         "iconURL": "https://githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.webp",
         "tintColor": "#007AFF",
