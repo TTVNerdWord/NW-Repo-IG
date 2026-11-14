@@ -15,11 +15,11 @@
       "tintColor": "#007AFF",
       "versions": [
         {
-          "version": "2.5.0",
+          "version": "1.9.2",
           "date": "2026-11-14",
-          "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/2.5.0NoIntegrity.ipa",
-          "size": 5090796,
-          "localizedDescription": "Version 2.5.0 release update update."
+          "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/AS-1.9.2-FullTweak.ipa",
+          "size": 5288343,
+          "localizedDescription": "Version 1.9.2 release update update."
         }
       ]
     },
@@ -33,11 +33,11 @@
       "tintColor": "#007AFF",
       "versions": [
         {
-          "version": "1.9.2",
+          "version": "2.5.0",
           "date": "2026-11-14",
-          "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/AS-1.9.2-FullTweak.ipa",
-          "size": 5288343,
-          "localizedDescription": "Version 1.9.2 release update update."
+          "downloadURL": "https://TTVNerdWord.github.io/NW-Repo-IG/2.5.0NoIntegrity.ipa",
+          "size": 5090796,
+          "localizedDescription": "Version 2.5.0 release update update."
         }
       ]
     }
