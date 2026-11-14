@@ -2,7 +2,7 @@
   "name": "Armor Sandbox Tweaks",
   "identifier": "com.ArmorSandbox.repo",
   "subtitle": "I do what I want. I do what I please",
-  "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/AS.png",
+  "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/Hi.png",
   "tintColor": "#007AFF",
   "apps": [
     {
@@ -11,7 +11,7 @@
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
       "localizedDescription": "Sideloaded build for Armor Sandbox (2.5.0) compiled dynamically.",
-      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/AS.png",
+      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/Hi.png",
       "tintColor": "#007AFF",
       "versions": [
         {
@@ -29,7 +29,7 @@
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
       "localizedDescription": "Sideloaded build for Armor Sandbox (1.9.2) compiled dynamically.",
-      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/AS.png",
+      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/Armor-Sandbox-Tweaks/main/Images/Hi.png",
       "tintColor": "#007AFF",
       "versions": [
         {
