@@ -57,14 +57,15 @@ def main():
     base_url = f"https://{username}.github.io/{repo_name}"
     
  
-    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/AS.png"
-    icon_url2 = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/Hi.png" 
+    repo_icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/Hi.png"
+   
+    app_icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/AS.png"
     
     data = {
         "name": "Armor Sandbox Tweaks",
         "identifier": "com.ArmorSandbox.repo",
         "subtitle": "I do what I want. I do what I please",
-        "iconURL": icon_url2,
+        "iconURL": repo_icon_url,
         "tintColor": "#007AFF",
         "apps": [],
         "news": []
@@ -95,7 +96,7 @@ def main():
                     "developerName": "Self-Published",
                     "subtitle": "Sideloaded Build",
                     "localizedDescription": f"Sideloaded build for {unique_app_name} compiled dynamically.",
-                    "iconURL": icon_url,
+                    "iconURL": app_icon_url,
                     "tintColor": "#007AFF",
                     "versions": [
                         {
