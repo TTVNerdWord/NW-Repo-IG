@@ -6,7 +6,7 @@
   "tintColor": "#007AFF",
   "apps": [
     {
-      "name": "Armor Sandbox (1.9.2X)",
+      "name": "Armor Sandbox (1.9.2)",
       "bundleIdentifier": "com.armorsimulation.app.as192fulltweak",
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
