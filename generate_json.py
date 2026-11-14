@@ -57,13 +57,14 @@ def main():
     base_url = f"https://{username}.github.io/{repo_name}"
     
  
-    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/Hi.png"
+    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/AS.png"
+    icon_url2 = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/Images/Hi.png" 
     
     data = {
         "name": "Armor Sandbox Tweaks",
         "identifier": "com.ArmorSandbox.repo",
         "subtitle": "I do what I want. I do what I please",
-        "iconURL": icon_url,
+        "iconURL": icon_url2,
         "tintColor": "#007AFF",
         "apps": [],
         "news": []
