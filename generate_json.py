@@ -63,8 +63,8 @@ def main():
     base_url = f"https://{username}.github.io/{repo_name}"
     
     data = {
-        "name": "NerdWorld",
-        "identifier": "com.ttvnerdword.repo",
+        "name": "Armor Sandbox Tweaks",
+        "identifier": "com.AS.repo",
         "subtitle": "I do what I want. I do what I please",
         "iconURL": "https://githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.webp",
         "tintColor": "#007AFF",
