@@ -2,7 +2,7 @@
   "name": "Armor Sandbox Tweaks",
   "identifier": "com.ArmorSandbox.repo",
   "subtitle": "I do what I want. I do what I please",
-  "iconURL": "https://githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.webp",
+  "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.png",
   "tintColor": "#007AFF",
   "apps": [
     {
@@ -11,7 +11,7 @@
       "developerName": "Self-Published",
       "subtitle": "Sideloaded Build",
       "localizedDescription": "Sideloaded build for Armor Sandbox compiled dynamically.",
-      "iconURL": "https://githubusercontent.com",
+      "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.png",
       "tintColor": "#007AFF",
       "versions": [
         {
@@ -19,7 +19,7 @@
           "date": "2026-11-14",
           "downloadURL": "https://TTVNerdWord.github.io/Armor-Sandbox-Tweaks/2.5.0NoIntegrity.ipa",
           "size": 5090796,
-          "localizedDescription": "Version 2.5.0 release update update."
+          "localizedDescription": "Version 2.5.0 release update."
         }
       ]
     }
