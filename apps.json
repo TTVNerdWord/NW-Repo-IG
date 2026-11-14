@@ -15,24 +15,6 @@
       "tintColor": "#007AFF",
       "versions": [
         {
-          "version": "1.9.2",
-          "date": "2026-11-14",
-          "downloadURL": "https://TTVNerdWord.github.io/Armor-Sandbox-Tweaks/AS-1.9.2-FullTweak.ipa",
-          "size": 5288343,
-          "localizedDescription": "Version 1.9.2 release update update."
-        }
-      ]
-    },
-    {
-      "name": "Armor Sandbox",
-      "bundleIdentifier": "com.armorsimulation.app",
-      "developerName": "Self-Published",
-      "subtitle": "Sideloaded Build",
-      "localizedDescription": "Sideloaded build for Armor Sandbox compiled dynamically.",
-      "iconURL": "https://githubusercontent.com",
-      "tintColor": "#007AFF",
-      "versions": [
-        {
           "version": "2.5.0",
           "date": "2026-11-14",
           "downloadURL": "https://TTVNerdWord.github.io/Armor-Sandbox-Tweaks/2.5.0NoIntegrity.ipa",
