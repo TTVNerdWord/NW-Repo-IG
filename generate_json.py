@@ -56,57 +56,58 @@ def main():
     repo_name = "Armor-Sandbox-Tweaks"
     base_url = f"https://{username}.github.io/{repo_name}"
     
+    # Dynamic raw link for AS.png in your repository
+    icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/main/AS.png"
+    
     data = {
         "name": "Armor Sandbox Tweaks",
         "identifier": "com.ArmorSandbox.repo",
         "subtitle": "I do what I want. I do what I please",
-        "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.png",
+        "iconURL": icon_url,
         "tintColor": "#007AFF",
         "apps": [],
         "news": []
     }
 
     found_ipas = False
-    apps_dict = {}  # Dictionary to group versions by bundleIdentifier
 
     for file in os.listdir("."):
         if file.endswith(".ipa"):
             found_ipas = True
-            bundle_id, version, display_name = extract_metadata(file)
+            plist_bundle_id, version, display_name = extract_metadata(file)
             file_size = os.path.getsize(file)
             current_date = datetime.utcnow().strftime("%Y-%m-%d")
             
-            version_entry = {
-                "version": version,
-                "date": current_date,
-                "downloadURL": f"{base_url}/{file}",
-                "size": file_size,
-                "localizedDescription": f"Version {version} release update."
+            # Create a unique bundle ID suffix so multiple uploads don't conflict
+            file_slug = os.path.splitext(file)[0].lower()
+            file_slug = re.sub(r'[^a-z0-9]', '', file_slug)
+            
+            unique_bundle_id = f"{plist_bundle_id}.{file_slug}"
+            unique_app_name = f"{display_name} ({os.path.splitext(file)[0]})"
+            
+            app_entry = {
+                "name": unique_app_name,
+                "bundleIdentifier": unique_bundle_id,
+                "developerName": "Self-Published",
+                "subtitle": "Sideloaded Build",
+                "localizedDescription": f"Sideloaded build for {unique_app_name} compiled dynamically.",
+                "iconURL": icon_url,
+                "tintColor": "#007AFF",
+                "versions": [
+                    {
+                        "version": version,
+                        "date": current_date,
+                        "downloadURL": f"{base_url}/{file}",
+                        "size": file_size,
+                        "localizedDescription": f"Version {version} release update."
+                    }
+                ]
             }
-            
-            if bundle_id in apps_dict:
-                # If app already exists, append this version to its list
-                apps_dict[bundle_id]["versions"].append(version_entry)
-            else:
-                # Otherwise, create the new app entry with this version
-                apps_dict[bundle_id] = {
-                    "name": display_name,
-                    "bundleIdentifier": bundle_id,
-                    "developerName": "Self-Published",
-                    "subtitle": "Sideloaded Build",
-                    "localizedDescription": f"Sideloaded build for {display_name} compiled dynamically.",
-                    "iconURL": "https://raw.githubusercontent.com/TTVNerdWord/NW-Repo-IG/main/hi.png",
-                    "tintColor": "#007AFF",
-                    "versions": [version_entry]
-                }
-            
-            print(f"Successfully processed: {display_name} [{bundle_id}] v{version}")
+            data["apps"].append(app_entry)
+            print(f"Successfully processed: {unique_app_name} [{unique_bundle_id}] v{version}")
 
     if not found_ipas:
         print("No .ipa files detected in the root directory.")
-
-    # Convert the grouped dictionary back into the apps list
-    data["apps"] = list(apps_dict.values())
 
     with open("apps.json", "w") as f:
         json.dump(data, f, indent=2)
